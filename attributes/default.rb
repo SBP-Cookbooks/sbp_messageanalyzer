@@ -21,8 +21,8 @@ default['msganalyzer']['package_name'] = 'Microsoft Message Analyzer 1.1'
 
 if kernel['machine'] =~ /x86_64/
   default['msganalyzer']['url']      = 'http://download.microsoft.com/download/2/8/3/283DE38A-5164-49DB-9883-9D1CC432174D/MessageAnalyzer64.msi'
-  default['msganalyzer']['checksum'] = 'f711a8d561f7784eb1daa860b0b560b479e0bb6f1c238b1ff4c1e86c8052394e'
+  default['msganalyzer']['checksum'] = '9cb8ed66ccf70c5930a160d54c877965356a0b439431f424fe7e9cc20278de75'
 else
   default['msganalyzer']['url']      = 'http://download.microsoft.com/download/2/8/3/283DE38A-5164-49DB-9883-9D1CC432174D/MessageAnalyzer.msi'
-  default['msganalyzer']['checksum'] = '2fb5b85b6602554e1c20203901471c5489fd1e1952b559a24385034413ed2839'
+  default['msganalyzer']['checksum'] = '3b56926c3c29c4dd51bf19fa51728c79dacd0a32d9e578f4896b284b50171912'
 end

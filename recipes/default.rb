@@ -21,5 +21,6 @@ windows_package node['msganalyzer']['package_name'] do
   source node['msganalyzer']['url']
   checksum node['msganalyzer']['checksum']
   installer_type :msi
+  options '/quiet /norestart'
   action :install
 end
