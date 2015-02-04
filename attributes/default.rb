@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['msganalyzer']['package_name'] = 'Microsoft Message Analyzer 1.1'
+default['msganalyzer']['package_name'] = 'Microsoft Message Analyzer'
 
 if kernel['machine'] =~ /x86_64/
   default['msganalyzer']['url']      = 'http://download.microsoft.com/download/2/8/3/283DE38A-5164-49DB-9883-9D1CC432174D/MessageAnalyzer64.msi'
