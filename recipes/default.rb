@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe 'ms_dotnet45'
 
 windows_package node['msganalyzer']['package_name'] do
   source node['msganalyzer']['url']
