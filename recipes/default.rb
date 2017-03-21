@@ -1,6 +1,8 @@
 #
-# Cookbook Name:: sbp_messageanalyzer
+# Cookbook:: sbp_messageanalyzer
 # Recipe:: default
+#
+# Copyright:: 2015-2017, Schuberg Philis
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,12 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe 'ms_dotnet45'
 
-windows_package node['msganalyzer']['package_name'] do
-  source node['msganalyzer']['url']
-  checksum node['msganalyzer']['checksum']
-  installer_type :msi
-  options '/quiet /norestart'
+#<
+# Recipe to install Microsoft Message Analyzer.
+#>
+
+include_recipe 'ms_dotnet::ms_dotnet4'
+
+windows_package 'Microsoft Message Analyzer' do
+  source node['sbp_messageanalyzer']['url']
+  checksum node['sbp_messageanalyzer']['checksum']
   action :install
 end

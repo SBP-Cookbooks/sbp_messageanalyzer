@@ -1,0 +1,44 @@
+sudo: required
+dist: trusty
+
+addons:
+  apt:
+    sources:
+      - chef-stable-trusty
+    packages:
+      - chefdk
+
+install: echo "skip bundle install"
+
+services: docker
+
+env:
+  global:
+    secure: PwFbLg8efkcIln/zs160KFpH8iIGI2InpwNv+wQirU7wL1m7e/6Vm9kyf4ObSriHjJCBio2LSxt+t939Ed/P6LXnZJ/WnHlJig4rzgsGAgJ4D7bMlvQRGPifwt8XFjfloxnJMpDInTK4t5iSs8va55e040nMnvdnnEjgRgOaE3M=
+
+before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - chef gem install knife-cookbook-doc
+  - chef --version
+  - cookstyle --version
+  - foodcritic --version
+
+script:
+  - chef exec rake
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_85a8fb9407a3_key -iv $encrypted_85a8fb9407a3_iv -in supermarket.pem.enc -out supermarket.pem -d
+  - chef gem install stove
+  - git config --global user.email "cookbooks@schubergphilis.com"
+  - git config --global user.name "SBP Cookbooks CI"
+  - git remote rm origin
+  - git remote add origin https://sbp-cookbooks-ci:$GH_TOKEN@github.com/sbp-cookbooks/sbp_messageanalyzer.git
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: STOVE_CONFIG=.stove chef exec stove --log-level debug
+    on:
+      repo: sbp-cookbooks/sbp_messageanalyzer
+      branch: master
+      condition: "$(git diff @~1 metadata.rb | grep +version)"
